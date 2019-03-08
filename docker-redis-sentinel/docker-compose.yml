@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  master:
+    image: redis:${REDIS_VERSION}
+
+  slave:
+    image: redis:${REDIS_VERSION}
+    command: redis-server --slaveof master 6379
+    depends_on:
+      - master
+
+  sentinel:
+    build:
+      context: .
+      args:
+        REDIS_VERSION: ${REDIS_VERSION}
+    environment:
+      - MASTER_NAME=mymaster
+      - MASTER=master
+      - QUORUM=1
+      - DOWN_AFTER=5000
+      - FAILOVER_TIMEOUT=5000
+    depends_on:
+      - master
