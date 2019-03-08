@@ -140,9 +140,9 @@ $ docker exec docker-redis-sentinel_sentinel_1 redis-cli -p 26379 sentinel get-m
 
 
 [1]: https://redis.io/topics/sentinel
-[2]: https://redis.io/topics/sentinel
-[3]: https://redis.io/topics/sentinel
-[4]: https://redis.io/topics/sentinel
+[2]: https://github.com/yankuangshi/redis-ha/blob/master/docker-redis-sentinel/docker-compose.yml
+[3]: https://github.com/yankuangshi/redis-ha/blob/master/docker-redis-sentinel/Dockerfile
+[4]: https://github.com/yankuangshi/redis-ha/blob/master/docker-redis-sentinel/entrypoint.sh
 [5]: http://download.redis.io/redis-stable/sentinel.conf
 [6]: https://hub.docker.com/_/redis#image_variants
 [7]: https://redis.io/topics/sentinel#sentinel-api
