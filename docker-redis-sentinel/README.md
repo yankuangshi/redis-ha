@@ -147,6 +147,11 @@ $ docker exec docker-redis-sentinel_sentinel_1 redis-cli -p 26379 sentinel get-m
 $ ./test.sh
 ```
 
+参考
+---
+* https://github.com/AliyunContainerService/redis-cluster
+* https://medium.com/@mustafa.ileri/redis-clustering-with-redis-sentinel-on-docker-1090ab876f97
+
 
 [1]: https://redis.io/topics/sentinel
 [2]: https://github.com/yankuangshi/redis-ha/blob/master/docker-redis-sentinel/docker-compose.yml
