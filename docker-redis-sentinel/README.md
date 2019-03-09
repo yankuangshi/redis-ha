@@ -65,6 +65,7 @@ Redis镜像的版本在`env.sample`中做了定义，使用的是redis apline镜
 * 创建镜像并且启动容器
 
 ```sh
+$ cd docker-redis-sentinel
 $ cp env.sample .env
 $ docker-compose up --build -d
 ...
@@ -137,6 +138,14 @@ $ docker exec docker-redis-sentinel_sentinel_1 redis-cli -p 26379 sentinel get-m
 
 其余Sentinel相关的API可以查看该[文档][7]
 
+实验
+---
+
+为了验证哨兵的监控和自动故障迁移，可以通过执行`test.sh`测试文件来验证
+
+```sh
+$ ./test.sh
+```
 
 
 [1]: https://redis.io/topics/sentinel
