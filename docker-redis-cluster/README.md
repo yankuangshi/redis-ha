@@ -67,7 +67,7 @@ $ docker run -d --rm \
 redis redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes
 ```
 
-根据redis cluster文档，最小集群要求至少3个master节点，文档强烈建议我们创建总共6个节点（3个master，3个slave）
+根据redis cluster文档，最小集群要求至少3个master节点，文档强烈建议我们创建总共6个节点（3个master，3个slave）
 > Note that the minimal cluster that works as expected requires to contain at least three master nodes. For your first tests it is strongly suggested to start a six nodes cluster with three masters and three slaves.
 
 启动6个redis容器，分别命名为redis-1，redis-2，...，redis-6即可，通过以下命令可以查看每个容器的IP：
@@ -143,7 +143,7 @@ $ docker exec redis-4 redis-cli -p 6379 cluster replicate master_node_id
 ---
 redis提供了更加方便创建cluster的2种方式：
 
-* 利用ruby脚本[redis-trib.rb][3]（该脚本位于redis的src文件夹中）创建cluster集群，该方式适合老版本redis（redis3.0和redis4.0）
+* 利用ruby脚本[redis-trib.rb][3]（该脚本位于redis的src文件夹中）创建cluster集群，该方式适合老版本redis（redis3.0和redis4.0）
 * 利用`redis-cli`命令直接创建cluster集群，该方式适合redis5.0(截止目前为止redis的最新版本是5.0)
 
 通过redis cluster文档，我们也可以发现在文档中做了相关说明：
