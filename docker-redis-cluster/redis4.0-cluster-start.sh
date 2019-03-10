@@ -49,6 +49,9 @@ echo $PWD
 
 # Important thing here is to add the ruby container into ‘red_cluster’ network, 
 # otherwise it will not be able to access Redis containers via their IP addresses.
-echo 'yes' | docker run -i --rm -v $PWD/redis-trib.rb:/redis-trib.rb --net $network_name ruby sh -c '\
+echo 'yes' | docker run -i --rm --net $network_name ruby sh -c '\
     gem install redis \
+    && wget http://download.redis.io/releases/redis-4.0.13.tar.gz \
+    && tar zxf redis-4.0.13.tar.gz \
+    && cd redis-4.0.13/src \
     && ruby redis-trib.rb create --replicas 1 '"$cluster_hosts"
