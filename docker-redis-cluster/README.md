@@ -1,5 +1,7 @@
 Docker-Redis-Cluster
 ===
+![](../resource/redis-docker.png)
+
 该项目利用`docker`搭建一个[Redis Cluster][1]集群
 
 ![cluster-topology](../resource/redis-cluster.png)

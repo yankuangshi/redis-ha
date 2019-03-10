@@ -1,5 +1,7 @@
 Docker-Redis-Sentinel
 ====
+![](../resource/redis-docker.png)
+
 该项目利用`docker-compose`编排一个Redis的哨兵（[Sentinel][1]）集群
 
 ![sentinel-topology](../resource/redis-sentinel.png)
