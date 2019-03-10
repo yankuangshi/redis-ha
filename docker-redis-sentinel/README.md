@@ -2,6 +2,9 @@ Docker-Redis-Sentinel
 ====
 该项目利用`docker-compose`编排一个Redis的哨兵（[Sentinel][1]）集群
 
+![sentinel-topology](../resource/redis-sentinel.png)
+(图来自： https://redislabs.com/redis-features/high-availability)
+
 服务说明
 ---
 [docker-compose.yml][2]文件中定义了3个服务：
@@ -146,6 +149,8 @@ $ docker exec docker-redis-sentinel_sentinel_1 redis-cli -p 26379 sentinel get-m
 ```sh
 $ ./test.sh
 ```
+
+Cheers!
 
 参考
 ---
