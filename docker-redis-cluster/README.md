@@ -70,7 +70,7 @@ redis redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes
 根据redis cluster文档，最小集群要求至少3个master节点，文档强烈建议我们创建总共6个节点（3个master，3个slave）
 > Note that the minimal cluster that works as expected requires to contain at least three master nodes. For your first tests it is strongly suggested to start a six nodes cluster with three masters and three slaves.
 
-启动6个redis容器，分别命名为redis-1，redis-2，...，redis-6即可，通过以下命令可以查看每个容器的IP：
+启动6个redis容器，分别命名为redis-1，redis-2，...，redis-6即可，通过以下命令可以查看每个容器的IP：
 
 ```sh
 $ docker inspect -f '{{.Name}} - {{ (index .NetworkSettings.Networks "red_cluster_net").IPAddress }}' $(docker ps -q)
@@ -136,7 +136,7 @@ $ docker exec redis-4 redis-cli -p 6379 cluster replicate master_node_id
 
 ![cluster_screenshot2](../resource/cluster2.png)
 
-以上例子只是为了帮助更好地理解搭建cluster的流程：配置cluster文件 -> 启动cluster节点 -> 关联节点 -> 分配slot -> 设置主从复制
+以上例子只是为了帮助更好地理解搭建cluster的流程：配置cluster文件 -> 启动cluster节点 -> 关联节点 -> 分配slot -> 主从复制
 
 
 自动搭建Redis Cluster集群
@@ -180,7 +180,7 @@ $ docker run -i --rm -v $PWD/redis-trib.rb:/redis-trib.rb --net red_cluster_net 
 $ docker run -i --rm --net red_cluster_net redis redis-cli --cluster create 172.30.0.2:6379 172.30.0.3:6379 172.30.0.4:6379 172.30.0.5:6379 172.30.0.6:6379 172.30.0.7:6379 --cluster-replicas 1
 ```
 
-> 这里要注意一点，无论是新创建的ruby容器还是新的redis容器都需要加入同一个docker network中（例子中为red_cluster_net），否在将无法和已经创建的6个集群节点进行通信
+> 这里要注意一点，无论是新创建的ruby容器还是新的redis容器都需要加入同一个docker network中（例子中为red_cluster_net），否在将无法和已经创建的6个集群节点进行通信
 
 
 最后可以得到如下信息：
