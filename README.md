@@ -59,9 +59,9 @@ slave可以接受其他slave的连接，像层叠装的结构（cascading-like s
 
 有3种方式：
 
-    1. 配置文件中加入`slaveof {masterip} {masterport}`
-    2. redis-server启动命令后加入`--slaveof {masterip} {masterport}`
-    3. 在从节点的redis-cli中执行`slaveof {masterip} {masterport}`
+* 配置文件中加入`slaveof {masterip} {masterport}`
+* redis-server启动命令后加入`--slaveof {masterip} {masterport}`
+* 在从节点的redis-cli中执行`slaveof {masterip} {masterport}`
 
 2. 断开复制
 
@@ -71,8 +71,8 @@ slave可以接受其他slave的连接，像层叠装的结构（cascading-like s
 
 如果在主节点中通过`requirepass`设置了密码，那么需要在从节点中配置与主节点一致的密码，才能发起复制流程：
 
-    1. 通过redis-cli输入：`config set masterauth <password>`    
-    2. 通过配置文件：`masterauth <password>`
+* 通过redis-cli输入：`config set masterauth <password>`    
+* 通过配置文件：`masterauth <password>`
 
 ### 主从复制存在的问题
 
@@ -92,11 +92,9 @@ Redis哨兵（[Redis Sentinel][2]）在Redis2.8开始引入。核心功能是主
 3. 自动故障转移（Automatic failover）：当主节点故障，哨兵会将失效的主节点的其中一个从节点升级为新的主节点，并让其他从节点改为复制新的主节点
 4. 配置提供者（Configuration provider）：哨兵可以为客服端提供服务发现
 
-### 拓扑结构（Sentinel Topology）
+### 拓扑结构
 
 ![](resource/redis-sentinel.png)
-
-![哨兵拓扑结构](resource/sentinel.png)
 
 它由两部分组成：
 
@@ -105,15 +103,15 @@ Redis哨兵（[Redis Sentinel][2]）在Redis2.8开始引入。核心功能是主
 
 客户端连接时，会首先连接sentinel，通过sentinel获取主节点的地址，然后再连接主节点进行数据交互。当主节点故障时，客户端会重新向sentinel要地址，sentinel会将新选出来的主节点的地址告诉客户端，因此客户端无需重启就可以完成节点的切换
 
-主节点故障前
+1. 主节点故障前
 
 ![](resource/sentinel1.png)
 
-主节点发生故障，主从复制断开连接，客户端和主节点的连接也断开；sentinel在从节点中选举出新的主节点，其他从节点和新的主节点建立主从复制关系，客户端获得新的主节点地址，重新建立连接
+2. 主节点发生故障，主从复制断开连接，客户端和主节点的连接也断开；sentinel在从节点中选举出新的主节点，其他从节点和新的主节点建立主从复制关系，客户端获得新的主节点地址，重新建立连接
 
 ![](resource/sentinel2.png)
 
-旧的主节点故障恢复，变成从节点，和新的主节点建立主从复制关系
+3. 旧的主节点故障恢复，变成从节点，和新的主节点建立主从复制关系
 
 ![](resource/sentinel3.png)
 
@@ -125,8 +123,8 @@ Redis哨兵（[Redis Sentinel][2]）在Redis2.8开始引入。核心功能是主
 
 哨兵解决了redis数据节点的自动故障迁移的问题，但是还是无法解决主从复制遗留下来的两个问题
 
-2. 写操作无法负载均衡
-3. 存储能力受到单机的限制
+- 写操作无法负载均衡
+- 存储能力受到单机的限制
 
 集群模式
 ---
@@ -137,9 +135,9 @@ Redis集群没有使用[一致性hash][5], 而是引入了*哈希槽（hash slot
 
 Redis集群有16384个哈希槽，每个key通过CRC16校验后对16384取模来决定放置哪个槽。集群的每个节点负责一部分hash槽，举个例子,比如当前集群有3个节点，那么：
 
-- 节点 A 包含 0 到 5500号哈希槽
-- 节点 B 包含5501 到 11000 号哈希槽
-- 节点 C 包含11001 到 16384号哈希槽
+* 节点A包含`0-5500`号哈希槽
+* 节点B包含`5501-11000`号哈希槽
+* 节点C包含`11001-16384`号哈希槽
 
 ### Redis集群的主从复制
 
